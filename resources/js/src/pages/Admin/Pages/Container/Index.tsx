@@ -11,6 +11,8 @@ import { Button, Skeleton, TableHead, Tooltip } from '@mui/material';
 import TablePaginationWrapper from '../../../../components/MUI/TablePaginationWrapper';
 import { Link } from 'react-router';
 import { useGetContainersQuery } from '../../../../api/api';
+import { useDispatch } from 'react-redux';
+import { setPageTitle } from '../../../../store/themeConfigSlice';
 
 // function createData(name: string, calories: number, fat: number) {
 //     return { name, calories, fat };
@@ -33,6 +35,7 @@ import { useGetContainersQuery } from '../../../../api/api';
 // ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
 export default function Index() {
+    const dispatch = useDispatch();
     const [rows, setRows] = React.useState([]);
     const [totalRecords, setTotalRecords] = React.useState(0);
     const [page, setPage] = React.useState(0);
@@ -44,6 +47,7 @@ export default function Index() {
                                                         _items_per_page: rowsPerPage,
                                                     });
     React.useEffect(() => {
+        dispatch(setPageTitle('Containers'));
         if (data) {
             setRows(data.containers); 
             setTotalRecords(data.total_records);

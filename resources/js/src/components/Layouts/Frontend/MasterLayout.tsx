@@ -91,7 +91,7 @@ const MasterLayout = ({ children }: PropsWithChildren) => {
 
                         {/* BEGIN CONTENT AREA */}
                         <Suspense>
-                            <div className={`${themeConfig.animation} px-15 md:px-30 lg:px-40 py-3 animate__animated`}>
+                            <div className={`${themeConfig.animation} px-10 md:px-30 lg:px-40 py-3 animate__animated`}>
                                 <Outlet />
                             </div>
                         </Suspense>

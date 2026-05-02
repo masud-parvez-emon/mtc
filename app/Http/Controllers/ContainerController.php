@@ -13,13 +13,17 @@ class ContainerController extends Controller
 
     public function index(Request $request)
     {
-        $containers = Container::with(['category'])
+        $containers = Container::with(['category', 'trackings' => fn($query) => $query->orderBy('date', 'desc')])
                                 ->when($request->filled(['_page', '_items_per_page']), function($query) use($request){
                                     $query->skip(($request->query('_page')-1)*$request->query('_items_per_page'))
                                             ->limit($request->query('_items_per_page'));
                                 })
+                                ->when($request->query('number'), function($query, $value){
+                                    $query->where('number', $value);
+                                })
                                 ->get();
-        return response()->json(['containers' => $containers, 'total_records' => Container::count()]);
+        
+        return response()->json(['containers' => $containers, 'total_records' => $containers->count()]);
     }
 
     public function store(ContainerRequest $request)
@@ -47,6 +51,10 @@ class ContainerController extends Controller
         DB::transaction(function() use($containerRequest, $container){
             $container->fill($containerRequest->all());
             $container->save();
+
+            ContainerTracking::where('container_id', $container->id)
+                            ->whereNotIn('id', $containerRequest->collect('trackings')->pluck('id'))
+                            ->delete();
 
             [$containerToBeUpdated, $containerToBeCreated] = $containerRequest->collect('trackings')
                                                                             ->partition(function($item){

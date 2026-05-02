@@ -82,4 +82,4 @@ export const api = createApi({
     }),
 });
 
-export const { useFetchUserQuery, useLoginMutation, useLogoutMutation, useGetContainersQuery, useGetContainerByIdQuery, useGetContainerCategoriesQuery, useSaveContainerMutation, useUpdateContainerMutation } = api;
+export const { useFetchUserQuery, useLoginMutation, useLogoutMutation, useGetContainersQuery, useLazyGetContainersQuery, useGetContainerByIdQuery, useGetContainerCategoriesQuery, useSaveContainerMutation, useUpdateContainerMutation } = api;

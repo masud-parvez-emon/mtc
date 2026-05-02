@@ -1143,7 +1143,7 @@ hover:text-primary hover:before:bg-primary! ltr:before:mr-2 rtl:before:ml-2 dark
 
 @utility form-input {
   /* Form */
-  @apply w-full rounded-md border border-white-light bg-white px-4 py-2 text-sm font-semibold text-black outline-hidden! focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-[#121e32] dark:text-white-dark dark:focus:border-primary;
+  @apply w-full rounded-md border-2 border-white-light bg-white px-4 py-2 text-sm font-semibold text-black outline-hidden! focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-[#121e32] dark:text-white-dark dark:focus:border-primary;
 
   .has-error & {
     @apply border-danger bg-danger/8 text-danger placeholder-danger/70 focus:border-danger;
@@ -1754,4 +1754,19 @@ hover:text-primary hover:before:bg-primary! ltr:before:mr-2 rtl:before:ml-2 dark
 /* Hightlight JS */
 pre.hljs {
     @apply p-6 rounded-md overflow-x-auto bg-[#191e3a]!;
+}
+
+@keyframes boat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes wave-one {
+  0%, 100% { transform: translateX(5px); }
+  50% { transform: translateX(-5px); }
+}
+
+@keyframes wave-two {
+  0%, 100% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
 }

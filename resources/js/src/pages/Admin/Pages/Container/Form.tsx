@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { Alert, Autocomplete, Button, ButtonGroup, Divider, FormControl, Grid, Input, InputLabel, MenuItem, Select, Snackbar, Stack, TextField, Tooltip } from '@mui/material';
+import { Alert, Autocomplete, Button, ButtonGroup, Divider, FormControl, FormHelperText, Grid, Input, InputLabel, MenuItem, Select, Snackbar, Stack, TextField, Tooltip } from '@mui/material';
 import { Link, useNavigate, useParams } from 'react-router';
 import { useGetContainerByIdQuery, useGetContainerCategoriesQuery, useSaveContainerMutation, useUpdateContainerMutation } from '../../../../api/api';
 import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
@@ -124,7 +124,11 @@ export default function Form() {
                             placeholder='Example: MSDU7532999'
                             sx={{ width: 300 }}
                             size='small'
-                            {...register('number')}
+                            {...register('number', {
+                                onChange: (e) => {
+                                    e.target.value = e.target.value.toUpperCase();
+                                }
+                            })}
                             error={!!errors.number}
                             helperText={errors.number?.message}
                         />
@@ -170,25 +174,26 @@ export default function Form() {
                                     >
                                     <Grid container spacing={2} className='grow'>
                                         <Grid size={{ xs: 12, sm: 6, md: 3 }} >
-                                            <FormControl fullWidth>
-                                                <InputLabel size='small'>Status</InputLabel>
                                                 <Controller
                                                     name={`trackings.${index}.status`}
                                                     control={control}
-                                                    render={({ field }) => (
-                                                        <Select
-                                                            {...field}
-                                                            size='small'
-                                                            label="Status"
-                                                            {...(index == 0 ?  { disabled: true } : {})}
-                                                            >
-                                                            {index === 0 && <MenuItem value={'start'}>Start</MenuItem>}
-                                                            <MenuItem value={'checkpoint'}>Checkpoint</MenuItem>
-                                                            <MenuItem value={'over'}>Over</MenuItem>
-                                                        </Select>
+                                                    render={({ field:{ref,...field}, fieldState: { error } }) => (
+                                                        <FormControl fullWidth error={!!error}>
+                                                            <InputLabel size='small'>Status</InputLabel>
+                                                            <Select
+                                                                {...field}
+                                                                size='small'
+                                                                label="Status"
+                                                                {...(index == 0 ?  { disabled: true } : {})}
+                                                                >
+                                                                {index === 0 && <MenuItem value={'start'}>Start</MenuItem>}
+                                                                <MenuItem value={'checkpoint'}>Checkpoint</MenuItem>
+                                                                <MenuItem value={'over'}>Over</MenuItem>
+                                                            </Select>
+                                                            <FormHelperText>{error?.message}</FormHelperText>
+                                                        </FormControl>
                                                     )}
                                                 />
-                                            </FormControl>
                                         </Grid>
                                         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                                             <Controller

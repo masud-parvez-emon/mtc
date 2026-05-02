@@ -142,7 +142,7 @@ const themeConfigSlice = createSlice({
         },
 
         setPageTitle(state, { payload }) {
-            document.title = `${payload} | MST - Mostafa Trade Center`;
+            document.title = `${payload} | MSC`;
         },
     },
 });
