@@ -22,7 +22,7 @@ const Index = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(setPageTitle('Shipping Container Tracking and Tracing'));
+        dispatch(setPageTitle('Shipping Container Tracking'));
         if (data && resultsRef.current) {
             resultsRef.current.scrollIntoView({ 
                 behavior: 'smooth', 

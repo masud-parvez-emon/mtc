@@ -7,7 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="canonical" href="{{ config('app.url') }}">
+    <meta name="description" content="A largest import export company in Bangladesh.">
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "@id": "https://mostafatrade.com/#organization",
+            "name": "Mostafa Trade",
+            "url": "https://mostafatrade.com",
+            "logo": {
+                "@type": "ImageObject",
+                "@id": "https://mostafatrade.com/#logo",
+                "url": "https://mostafatrade.com/assets/images/mtc.svg",
+                "contentUrl": "https://mostafatrade.com/assets/images/mtc.svg",
+                "caption": "Mostafa Trade Logo",
+                "inLanguage": "en-US"
+            },
+            "description": "Mostafa Trade",
+            "sameAs": [
+                "https://x.com/mostafatrade"
+            ]
+        }
+    </script>
     @viteReactRefresh
     @vite(['resources/js/src/main.tsx'])
 </head>
